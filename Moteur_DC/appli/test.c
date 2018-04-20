@@ -82,7 +82,7 @@ void floatToInt(float in, int32_t *out_int, int32_t *out_dec, int32_t dec_prec);
 //Fonction de test (BLOCANTE !)
 void test(void)
 {
-	//Initialisation du timer 3 à une période de 1000µs (1ms)
+	//Initialisation du timer 3 ï¿½ une pï¿½riode de 1000ï¿½s (1ms)
 	#if USE_BSP_TIMER
 		TIMER_run_us(TIMER3_ID,1000, TRUE);
 	#endif
@@ -125,7 +125,7 @@ void test(void)
 		MPU6050_test();
 	#endif
 
-	#if USE_SENSOR_LSM6DS0 | USE_SENSOR_LSM6DS3		//Accéléromètre et Gyroscope
+	#if USE_SENSOR_LSM6DS0 | USE_SENSOR_LSM6DS3		//Accï¿½lï¿½romï¿½tre et Gyroscope
 		// Try to use LSM6DS3 DIL24 if present, otherwise use LSM6DS0 on board
 		BSP_ACCELERO_Init( ACCELERO_SENSORS_AUTO, (void**)&ACCELERO_handle );
 		BSP_GYRO_Init( GYRO_SENSORS_AUTO, (void**)&GYRO_handle );
@@ -192,7 +192,7 @@ void test(void)
 	#if USE_SD_CARD
 		DEMO_sd_state_machine(FALSE);
 	#endif
-		#if USE_SENSOR_LSM6DS0 |  USE_SENSOR_LSM6DS3		//Accéléromètre et Gyroscope
+		#if USE_SENSOR_LSM6DS0 |  USE_SENSOR_LSM6DS3		//Accï¿½lï¿½romï¿½tre et Gyroscope
 			if(BSP_ACCELERO_IsInitialized(ACCELERO_handle, &status) == COMPONENT_OK && status == 1)
 			{
 
