@@ -48,6 +48,8 @@ int main(void)
 		 */
 	//	UART_puts(UART1_ID, *test, USART1);
 
+		//test 6 git
+
 	}
 }
 
