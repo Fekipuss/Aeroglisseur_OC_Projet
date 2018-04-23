@@ -17,7 +17,7 @@
 #include "stm32f1_timer.h"
 #include "test.h"
 #include "stm32f1_motorDC.h"
-#include "stm32f1_pwm.h"
+#include "stm32f1_pwm.h"""
 
 #include "initialisations.h"
 #include "stm32f1xx_hal_tim.h"
@@ -28,7 +28,7 @@
 int main(void)
 {
 	/**
-	 * @brief	Initialisations de la carte, INDISPENSABLE, y mettre les lignes de code appelées unne seule fois
+	 * @brief	Initialisations de la carte, INDISPENSABLE, y mettre les lignes de code appelées une seule fois
 	 * @func Faire propre dans le main.c, pour ne pas s'emmêler les pinceaux avec trop de lignes
 	 */
 	Init_carte();
