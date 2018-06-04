@@ -52,7 +52,6 @@ int main(void)
 
 	while(1)
 	{
-		//testmaj
 		/**
 		 * @brief a
 		 */
