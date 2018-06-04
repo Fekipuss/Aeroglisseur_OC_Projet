@@ -10,7 +10,7 @@
 
 //Choix de la cible utilis�e.
 #define NUCLEO	0
-#define BLUEPILL 1
+#define BLUEPILL 0
 
 //_______________________________________________________
 //Configuration des broches utilis�es...

@@ -18,7 +18,6 @@
 #include "test.h"
 #include "stm32f1_motorDC.h"
 #include "stm32f1_pwm.h"
-
 #include "initialisations.h"
 #include "stm32f1xx_hal_tim.h"
 #include <stdio.h>
@@ -27,8 +26,9 @@
 
 int main(void)
 {
+	int16_t Duty1,Duty2,Duty3,Duty4;
 	/**
-	 * @brief	Initialisations de la carte, INDISPENSABLE, y mettre les lignes de code appelées unne seule fois
+	 * @brief	Initialisations de la carte, INDISPENSABLE, y mettre les lignes de code appelées une seule fois
 	 * @func Faire propre dans le main.c, pour ne pas s'emmêler les pinceaux avec trop de lignes
 	 */
 	Init_carte();
@@ -36,44 +36,29 @@ int main(void)
 	/**
 	 * @brief Lancement du moteur
 	 */
-	MOTOR_set_duty(20, MOTOR1);	//changement du duty cycle -/+100 %, changement de sens de rotation possible
+	//Le rapport cycique définit içi influe sur la vitesse de rotation du moteur.
+	//changement du duty cycle -/+100 %, changement de sens de rotation possible
+	// Motor1 = Moteur S / Motor2 = Moteur G / Motor3 = Moteur C / Motor 4 = Moteur D
+	Duty1 = 20;
+	Duty2 = 20;
+	Duty3 = 60;
+	Duty4 = 80;
+
+	//Application du rapport cyclique pour controle des différents moteurs
+	MOTOR_set_duty(Duty1, MOTOR1);	//PA8
+	MOTOR_set_duty(Duty2, MOTOR2);	//PA9
+	MOTOR_set_duty(Duty3, MOTOR3);	//PA10
+	MOTOR_set_duty(Duty4, MOTOR4);	//PA11
 
 	while(1)
 	{
+		//testmaj
 		/**
-		 * @brief	Envoi une chaine de caractere sur l'USARTx. Fonction BLOCANTE si un caractère est deja en cours d'envoi.
-		 * @func 	void UART_putc(UART_HandleTypeDef * UART_Handle, char c)
-		 * @param	str : la chaine de caract�re � envoyer
-		 * @param	USARTx : USART1, USART2 ou USART6
+		 * @brief a
 		 */
-	//	UART_puts(UART1_ID, *test, USART1);
 
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -6,33 +6,33 @@
  */
 
 /*
- * Ce module logiciel est destiné au pilotage de moteur DC à travers un pont en H BD6221F-E2
- * 	(ou modèle similaire en terme de signaux de commande)
+ * Ce module logiciel est destinï¿½ au pilotage de moteur DC ï¿½ travers un pont en H BD6221F-E2
+ * 	(ou modï¿½le similaire en terme de signaux de commande)
  *
  * Ce module utilise le pilote stm32f1_pwm.h
  *
- * Table de vérité des signaux de commande de ce pont en H BD6221 :
+ * Table de vï¿½ritï¿½ des signaux de commande de ce pont en H BD6221 :
  *
- * 	(lorsque l'entrée Vref est reliée à Vcc)
+ * 	(lorsque l'entrï¿½e Vref est reliï¿½e ï¿½ Vcc)
  *
  * 		Rin		Fin
  * 		0		0		moteur en roue libre
  * 		0		pwm		moteur en marche avant, 	vitesse proportionelle au rapport cyclique du signal pwm
- * 		pwm		0		moteur en marche arrière, 	vitesse proportionelle au rapport cyclique du signal pwm
+ * 		pwm		0		moteur en marche arriï¿½re, 	vitesse proportionelle au rapport cyclique du signal pwm
  * 		1		1		moteur en court-circuit (freinage maximal)
  *
- * 		Pour un châssis mobile, et dans la majorité des fonctionnement, on utilise les 3 premières lignes de cette table de vérité.
- * 		Selon le signe de la variable "duty", ce module logiciel est donc conçu pour produire  :
+ * 		Pour un chï¿½ssis mobile, et dans la majoritï¿½ des fonctionnement, on utilise les 3 premiï¿½res lignes de cette table de vï¿½ritï¿½.
+ * 		Selon le signe de la variable "duty", ce module logiciel est donc conï¿½u pour produire  :
  * 					-> une PWM vers une broche Fin, et un 0 logique vers la broche Rin
  * 			OU BIEN -> une PWM vers une broche Rin, et un 0 logique vers la broche Fin
  *
  *
- * Les ports utilisés par ce module logiciel sont imposés.
+ * Les ports utilisï¿½s par ce module logiciel sont imposï¿½s.
  * Il est possible de les changer en modifiant le contenu des fonctions MOTOR_init et MOTOR_set_duty.
  */
 
 /* Pour le module TB6612F-NG
- * Table de vérité des signaux de commande de ce pont en H TB6612F-NG
+ * Table de vï¿½ritï¿½ des signaux de commande de ce pont en H TB6612F-NG
  * 	PWM 	AIN1	AIN2
  * 	1		0		1		moteur en sens horaire inverse
  *  1		1		0		moteur en sens horaire
@@ -40,19 +40,19 @@
  *  0 		x		x		moteur en court-circuit (freinage maximal) !!
  *  x		1		1		moteur en court-circuit (freinage maximal) !!
  *
- * Il ne faut donc pas utiliser la broche nommée "PWM" pour y envoyer un signal PWM... sinon on alterne avec un état court-circuit.
- * Pour cela, pour une rotation en sens horaire : on envoie un signal PWM sur AIN1 en maintenant AIN2 à 0 et PWM à 1.
- *            pour une rotation anti-hoaire     : on envoie un signal PWM sur AIN2 en maintenant AIN1 à 0 et PWM à 1.
+ * Il ne faut donc pas utiliser la broche nommï¿½e "PWM" pour y envoyer un signal PWM... sinon on alterne avec un ï¿½tat court-circuit.
+ * Pour cela, pour une rotation en sens horaire : on envoie un signal PWM sur AIN1 en maintenant AIN2 ï¿½ 0 et PWM ï¿½ 1.
+ *            pour une rotation anti-hoaire     : on envoie un signal PWM sur AIN2 en maintenant AIN1 ï¿½ 0 et PWM ï¿½ 1.
  *  Exemple fonctionner de Branchements pouvant servir de base:
  *  TB6612F-NG			Nucleof103
- *  VM				--	5V ou toute tension "puissance" correspondant à la vitesse max du moteur
+ *  VM				--	5V ou toute tension "puissance" correspondant ï¿½ la vitesse max du moteur
  *  VCC				--  3.3V
- *  GND				--	GND (toutes les pins GND du module TB6612F-NG sont reliées entre elles)
+ *  GND				--	GND (toutes les pins GND du module TB6612F-NG sont reliï¿½es entre elles)
  * 	STBY			--	3.3V
  * 	PWMA			--  3.3V
  * 	AIN1			--	PB13 - par exemple... (pour sortir un signal PWM   ou bien   0)
  * 	AIN2			--	PA8  - par exemple... (pour sortir 0               ou bien   un signal PWM)
- * 	AO1 et AO2		--	Reliées aux broches du moteur
+ * 	AO1 et AO2		--	Reliï¿½es aux broches du moteur
  */
 #include "config.h"
 #if USE_MOTOR_DC
@@ -65,10 +65,10 @@
 
 
 /**
- * @brief 	Cette fonction est une machine a etat qui présente un exemple d'utilisation de ce module.
+ * @brief 	Cette fonction est une machine a etat qui prï¿½sente un exemple d'utilisation de ce module.
  * @func 	running_e DEMO_MOTOR_statemachine (bool_e ask_for_finish, char touch_pressed)
- * @param 	ask_for_finish : demande que la machine a état se termine.
- * @param	touch_pressed : caractère entré par l'utilisateur. NULL si aucun caractère.
+ * @param 	ask_for_finish : demande que la machine a ï¿½tat se termine.
+ * @param	touch_pressed : caractï¿½re entrï¿½ par l'utilisateur. NULL si aucun caractï¿½re.
  * @return	cette fonction retourne un element de l'enumeration running_e (END_OK= l'application est quittee avec succes ou IN_PROGRESS= l'application est toujours en cours)
  */
 running_e DEMO_MOTOR_statemachine (bool_e ask_for_finish, char touch_pressed)
@@ -156,19 +156,19 @@ running_e DEMO_MOTOR_statemachine (bool_e ask_for_finish, char touch_pressed)
 }
 
 
-#define	PWM_PERIOD	50		//Période du signal PWM, en microsecondes
-							//[50us <=> 20kHz, fréquence humainement inaudible et électroniquement pas trop élevée]
+#define	PWM_PERIOD	50		//Pï¿½riode du signal PWM, en microsecondes
+							//[50us <=> 20kHz, frï¿½quence humainement inaudible et ï¿½lectroniquement pas trop ï¿½levï¿½e]
 
-/** @brief Fonction qui configure et initialise les timers 1 et 2... pour les 8 signaux indiqués.
+/** @brief Fonction qui configure et initialise les timers 1 et 2... pour les 8 signaux indiquï¿½s.
  * @func void MOTOR_init(uint8_t nb_motors)
  */
 void MOTOR_init(uint8_t nb_motors)
 {
-	//Initialisation des périphériques TIMERS, configurés en production de signaux PWM, sorties à 0.
+	//Initialisation des pï¿½riphï¿½riques TIMERS, configurï¿½s en production de signaux PWM, sorties ï¿½ 0.
 	switch(nb_motors) {
 		case 4 :
 			PWM_run(TIMER1_ID, TIM_CHANNEL_4,FALSE,PWM_PERIOD,0, FALSE);	//1.CH4
-			PWM_run(TIMER2_ID, TIM_CHANNEL_4,FALSE,PWM_PERIOD,0, FALSE);	//2.CH4   ATTENTION, le canal CH4_N étant innaccessible sur le Timer 1, on utilise ici un second timer !
+			PWM_run(TIMER2_ID, TIM_CHANNEL_4,FALSE,PWM_PERIOD,0, FALSE);	//2.CH4   ATTENTION, le canal CH4_N ï¿½tant innaccessible sur le Timer 1, on utilise ici un second timer !
 		case 3 :
 			PWM_run(TIMER1_ID, TIM_CHANNEL_3,FALSE,PWM_PERIOD,0, FALSE);	//1.CH3
 			PWM_run(TIMER1_ID, TIM_CHANNEL_3,TRUE,PWM_PERIOD,0, FALSE);	//1.CH3N
@@ -182,16 +182,16 @@ void MOTOR_init(uint8_t nb_motors)
 }
 
 
-/** @brief	fonction qui applique le rapport cyclique demandé vers le pont de puissance qui pilote le moteur.
+/** @brief	fonction qui applique le rapport cyclique demandï¿½ vers le pont de puissance qui pilote le moteur.
  * @func	void MOTOR_set_duty(uint16_t duty, motor_e motor)
- * @param	duty  : le rapport cyclique a appliquer, de -100 à +100.
+ * @param	duty  : le rapport cyclique a appliquer, de -100 ï¿½ +100.
  * @param	motor : MOTOR1, MOTOR2, MOTOR3 ou MOTOR4
- * @post	Pour un rapport duty négatif, une PWM sera appliquée sur le canal négatif, et un 0 sera imposé sur le canal positif.
- * @post	Pour un rapport duty positif, une PWM sera appliquée sur le canal positif, et un 0 sera imposé sur le canal négatif.
+ * @post	Pour un rapport duty nï¿½gatif, une PWM sera appliquï¿½e sur le canal nï¿½gatif, et un 0 sera imposï¿½ sur le canal positif.
+ * @post	Pour un rapport duty positif, une PWM sera appliquï¿½e sur le canal positif, et un 0 sera imposï¿½ sur le canal nï¿½gatif.
  */
 void MOTOR_set_duty(int16_t duty, motor_e motor)
 {
-	bool_e negative;					//Indique si le rapport cyclique demandé est négatif.
+	bool_e negative;					//Indique si le rapport cyclique demandï¿½ est nï¿½gatif.
 	uint32_t channel;
 	timer_id_e timer_id;
 	TIM_HandleTypeDef * handler = NULL;
@@ -199,7 +199,7 @@ void MOTOR_set_duty(int16_t duty, motor_e motor)
 	TIM_HandleTypeDef * handler_stop = NULL;
 	negative = (duty < 0)?TRUE:FALSE;
 
-	//Ecretage... Le rapport cyclique est exprimé dans la même unité que la PWM_PERIOD, il ne peut donc pas être plus grand !
+	//Ecretage... Le rapport cyclique est exprimï¿½ dans la mï¿½me unitï¿½ que la PWM_PERIOD, il ne peut donc pas ï¿½tre plus grand !
 	if(duty > 100)
 		duty = 100;
 	else if(duty < -100)
@@ -208,7 +208,7 @@ void MOTOR_set_duty(int16_t duty, motor_e motor)
 	/* Configuration GPIO et remappings
 	 *
 	 * Pour chaque moteur, on dispose de deux signaux PWM.
-	 * Selon le sens demandé, démarre et on arrête les broches correspondantes.
+	 * Selon le sens demandï¿½, dï¿½marre et on arrï¿½te les broches correspondantes.
 	 */
 
 	switch(motor)

@@ -61,7 +61,10 @@ void Init_carte(void){
 		/**
 		 * @brief Initialisations liées aux moteurs
 		 */
-		MOTOR_init(1);	//init le moteur n°1
+		MOTOR_init(1);	//init le moteur n°1 //Timer1 Channel1 (PA8)
+		MOTOR_init(2); //Timer1 Channel 2 (PA9)
+		MOTOR_init(3); //Timer1 Channel 3 (PA10)
+		MOTOR_init(4); //Timer1 Channel 4 (PA11)
 
 //------------------------------------------------------------------------//
 
