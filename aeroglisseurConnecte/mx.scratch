@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Project>
-<ProjectName>D:\cours\I2\S8\OCProjet\codeStm32\aeroglisseurConnecte\\aeroglisseurConnecte</ProjectName>
+<ProjectName>D:\cours\I2\S8\OCProjet\cubeMX\\aeroglisseurConnecte</ProjectName>
 <ProjectNature>C</ProjectNature> 
 <CMSIS>..\Drivers\CMSIS</CMSIS>
 <HAL_Driver>C:\Users\mvinc\STM32Cube\Repository\STM32Cube_FW_F1_V1.6.1\Drivers\CMSIS</HAL_Driver>
