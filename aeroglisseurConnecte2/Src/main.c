@@ -40,7 +40,9 @@
 #include "main.h"
 #include "stm32f1xx_hal.h"
 
+
 /* USER CODE BEGIN Includes */
+#include "stdio.h"
 
 /* USER CODE END Includes */
 
